@@ -1,0 +1,1 @@
+../../tilesets/desert/rules/autotile.tmx
