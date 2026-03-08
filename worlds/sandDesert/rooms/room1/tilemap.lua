@@ -16,12 +16,12 @@ return {
     {
       name = "tilesetPrototype",
       firstgid = 1,
-      filename = "../../tilesets/desert/tilesetPrototype.tsx"
+      filename = "./tilesetPrototype.tsx"
     },
     {
       name = "sandDesert",
       firstgid = 15,
-      filename = "../../tilesets/desert/sandDesert.tsx"
+      filename = "./sandDesert.tsx"
     }
   },
   layers = {
