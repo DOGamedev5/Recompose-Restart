@@ -40,7 +40,9 @@ end
 
 function map:draw()
 	--self.tilemap:draw(64, 96)
+
 	self.tilemap:draw(Camera:getDrawX(0), Camera:getDrawY(0))
+	
 	
 end
 

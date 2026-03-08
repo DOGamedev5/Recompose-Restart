@@ -59,6 +59,7 @@ return {
       offsety = 0,
       parallaxx = 1,
       parallaxy = 1,
+      tintcolor = { 149, 182, 197 },
       properties = {},
       encoding = "lua",
       chunks = {

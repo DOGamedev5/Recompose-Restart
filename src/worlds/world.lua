@@ -21,9 +21,10 @@ end
 
 function world:draw()
 	--cam:attach()
-	love.graphics.setColor(0.92, 0.9, 0.995)
+	love.graphics.setColor(1, 1, 1)
 	self.worlds[1]:draw()
-	love.graphics.setColor(0.92, 0.4, 0.995)
+	
+	--love.graphics.setColor(0.92, 0.4, 0.995)
 	self.player:draw()
 	--cam:detach()
 end

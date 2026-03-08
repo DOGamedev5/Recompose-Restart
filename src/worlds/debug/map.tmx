@@ -6,7 +6,7 @@
  <tileset firstgid="1" name="tilesetPrototype" tilewidth="16" tileheight="16" tilecount="10" columns="5">
   <image source="../tilesetPrototype.png" width="80" height="32"/>
  </tileset>
- <layer id="1" name="Camada de Blocos 1" width="30" height="20">
+ <layer id="1" name="Camada de Blocos 1" width="30" height="20" tintcolor="#95b6c5">
   <data encoding="csv">
    <chunk x="-16" y="-16" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
