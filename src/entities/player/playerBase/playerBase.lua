@@ -13,8 +13,9 @@ function PlayerBase.new(x, y, world)
 end
 
 function PlayerBase:update(delta)
-	windowHandler.cameraPos.x = self.body:getX() - windowSize.x/2
-	windowHandler.cameraPos.y = self.body:getY() - windowSize.y/2
+	--windowHandler.cameraPos.x = self.body:getX() - windowSize.x/2
+	--windowHandler.cameraPos.y = self.body:getY() - windowSize.y/2
+	Camera:lookAt(self.body:getX(), self.body:getY())
 end
 
 function PlayerBase:draw()

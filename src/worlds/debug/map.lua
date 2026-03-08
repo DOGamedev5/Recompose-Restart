@@ -1,12 +1,13 @@
 local map = {}
 
 function map:load(world)
-	self.tilemap = sti("worlds/debug/tilemap.lua", 1, 1)
+	self.tilemap = sti("src/worlds/debug/tilemap.lua", 1, 1)
 	self:loadCollisions(world)
 end
 
 function map:loadCollisions(world)
-	self.collisions = {}
+	self.collisions = self.collisions or {}
+	self:clearCollisions()
 
 	if self.tilemap.layers["collision"] then
 		for i, v in ipairs(self.tilemap.layers["collision"].objects) do
@@ -21,7 +22,6 @@ function map:loadCollisions(world)
 				for j, p in pairs(v.polygon) do
 					points[#points + 1] = p.x - v.x
 					points[#points + 1] = p.y - v.y
-					print(p.x)
 				end
 
 				collider.shape = love.physics.newPolygonShape(points)
@@ -34,10 +34,29 @@ function map:loadCollisions(world)
 	end
 end
 
+function map:update(delta)
+	self.tilemap:update(delta)
+end
+
 function map:draw()
 	--self.tilemap:draw(64, 96)
-	self.tilemap:draw(-windowHandler.cameraPos.x, -windowHandler.cameraPos.y)
+	self.tilemap:draw(Camera:getDrawX(0), Camera:getDrawY(0))
 	
+end
+
+function map:clearCollisions()
+	for i, v in ipairs(self.collisions) do
+		v.fixture:destroy()
+		v.fixture:release()
+		v.shape:destroy()
+		v.shape:release()
+		v.body:destroy()
+		v.body:release()
+	end
+end
+
+function map:exit()
+	self:clearCollisions()
 end
 
 return map

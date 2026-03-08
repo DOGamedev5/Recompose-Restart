@@ -6,21 +6,24 @@ function world:load()
 	self.physicsWorld:setGravity(0, 0)
 	self.worlds = {}
 --	self.worlds[1] = sti("worlds/debug/map.lua", 1, 1)
-	self.worlds[1] = require("worlds.debug.map")
+	self.worlds[1] = require("src.worlds.debug.map")
 	self.worlds[1]:load(self.physicsWorld)
 	self.player = PlayerNormal.new(100, -40, self.physicsWorld)
 end
 
 function world:update(delta)
-	--world.worlds[1]:update(delta)
+	self.worlds[1]:update(delta)
 
 	self.player:update(delta)
 	self.physicsWorld:update(delta)
+	Camera:update(delta)
 end
 
 function world:draw()
+	--cam:attach()
 	love.graphics.setColor(0.92, 0.9, 0.995)
 	self.worlds[1]:draw()
 	love.graphics.setColor(0.92, 0.4, 0.995)
 	self.player:draw()
+	--cam:detach()
 end

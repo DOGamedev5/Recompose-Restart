@@ -890,6 +890,7 @@ end
 -- @param sy Scale on Y
 function Map:draw(tx, ty, sx, sy)
 	local current_canvas = lg.getCanvas()
+
 	lg.setCanvas(self.canvas)
 	lg.clear()
 
