@@ -28,11 +28,7 @@ function PlayerNormal:update(delta)
 	elseif love.keyboard.isDown("w") then --press the left arrow key to push the ball to the left
 	    self.body:applyLinearImpulse(0, -20)
 	end
---	if love.keyboard.isDown("up") then --press the left arrow key to push the ball to the left
---	    self.body:applyLinearImpulse(0, -100000)
---	    diry = 100
---	end
-	--self.body:setLinearVelocity(dirx, diry)
+
 end
 
 function PlayerNormal:draw()
