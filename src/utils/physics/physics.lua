@@ -1,4 +1,5 @@
 PhysicsServer = {}
+require("src.utils.physics.raycast")
 
 PhysicsServer.world = {}
 
