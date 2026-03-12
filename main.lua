@@ -35,12 +35,12 @@ function love.draw()
 	love.graphics.setBackgroundColor(0, 0, 0, 1)
   	
 	world:draw()
+  	--PhysicsServer:draw()
   	
   	love.graphics.setCanvas()
 	love.graphics.clear()
   	love.graphics.setBlendMode("alpha", "premultiplied")
   	love.graphics.draw(windowCanvas, pading.x, pading.y, 0, gameScale, gameScale)
-
 end
 
 function love.resize(w, h)

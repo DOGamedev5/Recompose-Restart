@@ -10,6 +10,8 @@ function Raycast.new(x, y, dirX, dirY)
 	self.castX = x + dirX
 	self.castY = y + dirY
 	self.lenght = Vector.len(dirX, dirY)
+
+	return self
 end
 
 function Raycast:cast(polygons)
@@ -38,22 +40,23 @@ end
 function Raycast:castPolygon(shape, collisionInfo)
 	for _, edge in ipairs(shape.edges) do
 		local x1 = self.x
-		local x2 = self.castX
-		local x3 = shape.points[edge.points[1]][1]
-		local x3 = shape.points[edge.points[2]][1]
 		local y1 = self.y
-		local y2 = self.castY
-		local y3 = shape.points[edge.points[1]][2]
-		local y3 = shape.points[edge.points[2]][2]
+		local x2 = self.x + self.dirX
+		local y2 = self.y + self.dirY
+
+		local x3 = shape.points[edge.points[1]][1] + shape.posX
+		local y3 = shape.points[edge.points[1]][2] + shape.posY
+		local x4 = shape.points[edge.points[2]][1] + shape.posX
+		local y4 = shape.points[edge.points[2]][2] + shape.posY
 
 		local den = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4))
 		if math.abs(den) == 0 then goto continue end
 
-		local t = ((x1 - x3) * (y3 - y4)) - ((y1 - y3) * (x3 - x4)) / den
-		local u = ((x1 - x2) * (y1 - y3)) - ((y1 - y2) * (x1 - x3)) / den
+		local t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den
+		local u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den
 
-		if not (t <= 1 and t >= 0 and u <= 1 and u >= 0) then goto continue end
-		
+		if not (t < 1 and t > 0 and u < 1 and u > 0) then goto continue end
+
 		local posX = x1 + t * (x2 - x1)
 		local posY = y1 + t * (y2 - y1)
 		local distance = Vector.len(posX-x1, posY-y1)
@@ -79,7 +82,7 @@ function Raycast:castCircle(shape, collisionInfo)
 
 	local a = Vector.dot(distX, distY, self.norX, self.norY)
 	local b2 = lenght2 - (a* a)
-	if radius2 - b2 < 0 then return end
+	if radius2 - b2 < 0 then return collisionInfo end
 
 	local f = math.sqrt(radius2 - b2)
 	local t = 0
@@ -104,5 +107,10 @@ function Raycast:castCircle(shape, collisionInfo)
 			collisionInfo.point[2] = pointY
 		end
 	end
+
 	return collisionInfo
+end
+
+function Raycast:draw()
+	love.graphics.line(self.x, self.y, self.castX, self.castY)
 end
